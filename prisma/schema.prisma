@@ -11,11 +11,79 @@ datasource db {
 }
 
 model User {
-    id String @id @default(cuid())
+    id String @default(cuid()) @id //@id définit la primary key
     name String
     firstname String
-    email String @unique
+    email String @unique // un email ne peut être utilisé qu'une seule fois
+    password String
     createdAt DateTime @default(now())
+    mainCurrency String
+    version String
+    options String
+    paiment String
+    isPaid Boolean @default(false)
     darkmode Boolean @default(false)
-    // ...
+}
+
+model Revenu {
+    id String @default(cuid()) @id
+    userId String // sera la clé secondaire, qui devra valoir la clé primaire User.id
+    categoryRevenu String // sera la clé secondaire qui devra valoir la clé primaire CategoryRevenu.id
+    category String 
+    label String
+    amount Float
+    recordAt DateTime // date du revenu définie par le user
+    createdAt DateTime // date de création d'une nouvelle ligne revenu
+}
+
+model Expense {
+    id String @default(cuid()) @id
+    userId String // sera la clé secondaire, qui devra valoir la clé primaire User.id
+    categoryExpense String // sera la clé secondaire qui devra valoir la clé primaire CategoryExpense.id
+    category String
+    label String
+    amount Float
+    recordAt DateTime // date de dépense définie par le user
+    createdAd DateTime // date de création d'une nouvelle ligne dépense
+}
+
+model Saving {
+    id String @default(cuid()) @id
+    userId String // sera la clé secondaire, qui devra valoir la clé primaire User.id
+    category String
+    amount Float
+    recordAt DateTime
+    createdAd DateTime
+}
+
+model RevenuCategorie {
+    id String @default(cuid()) @id
+    label String
+    description String
+    createdAt DateTime
+}
+
+model ExpenseCategory {
+    id String @default(cuid()) @id
+    label String
+    description String
+    createdAt DateTime
+}
+
+model Invoice {
+    id String @default(cuid()) @id
+    userId String // sera la clé secondaire, qui devra valoir la clé primaire User.id
+    amount Float
+    isPaid Boolean @default(false)
+    createdAt DateTime
+}
+
+model Currency {
+    id String @default(cuid()) @id
+    userId String // sera la clé secondaire, qui devra valoir la clé primaire User.id
+    label String
+    symbol String
+    changeRate Float
+    createdAd DateTime
+    mainCurrency String // sera la clé secondaire qui devra valoir la clé primaire User.mainCurrency
 }
