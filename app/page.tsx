@@ -6,7 +6,7 @@ export default function Landing() {
             <header className="w-full p-2 border-double border-2 border-sky-500">
                 <div className="items-center flex-wrap">
                     <h1>Mes Finances</h1>
-                    <Link href="/connexion" className="p-2 rounded-md bg-teal-700 text-white font-bold hover:bg-teal-600">Se connecter</Link>
+                    <Link href="/login" className="p-2 rounded-md bg-teal-700 text-white font-bold hover:bg-teal-600">Se connecter</Link>
                 </div>
             </header>
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">

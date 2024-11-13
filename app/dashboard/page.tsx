@@ -1,16 +1,21 @@
 import prisma from "@/lib/db";
 
 export default async function Dashboard() {
+    const users = await prisma.user.findMany();
 
-        const user = await prisma.user.findUnique({
-            where: {
-                id : 
-            }
-        })
+    if (!users || users.length === 0) {
+        return <p>Aucun utilisateur trouvé</p>;
+    }
 
     return (
         <>
-            Bienvenue 
+            <ul>
+                {users.map(user => (
+                    <li key={user.id}>
+                        Bienvenue {user.firstname}
+                    </li>
+                ))}
+            </ul>
         </>
-    )
+    );
 }
